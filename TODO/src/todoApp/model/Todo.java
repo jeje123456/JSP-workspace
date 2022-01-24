@@ -13,6 +13,15 @@ public class Todo {
 	protected Todo() {} // 자바 기본 Bean (기본 생성자)
 	
 	// 생성자 Constructor
+	public Todo(String title, String username, String description, LocalDate targetDate, boolean status) {
+		super();
+		this.title = title;
+		this.username = username;
+		this.description = description;
+		this.targetDate = targetDate;
+		this.status = status;
+	}
+	
 	public Todo(Long id, String title, String username, String description, LocalDate targetDate, boolean status) {
 		super();
 		this.id = id;
@@ -22,6 +31,7 @@ public class Todo {
 		this.targetDate = targetDate;
 		this.status = status;
 	}
+
 	// get set 메소드 자동 완성
 	public Long getId() {
 		return id;

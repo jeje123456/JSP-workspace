@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import todoApp.dao.LoginDao;
 import todoApp.model.LoginBean;
@@ -38,20 +39,23 @@ public class LoginController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8"); // 출력할때 한글
 		
 		// ID 패스워드를 파라메터로 입력받기
-		String userName = request.getParameter("userName");
+		String username = request.getParameter("userName");
 		String password = request.getParameter("password");
 		LoginBean loginBean = new LoginBean();
-		loginBean.setUsername(userName);
+		loginBean.setUsername(username);
 		loginBean.setPassword(password);
 		
 		if(loginDao.validate(loginBean)) { // 계정 있음 -> 로그인 됨
 			System.out.println("로그인 성공!");
+			HttpSession session = request.getSession();
+			session.setAttribute("username", username); // 로그인 한 유저네임을 세션에 저장
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-list.jsp");
 			dispatcher.forward(request, response);
 		}
 		else { // 계정 없음 -> 로그인 실패 -> 로그인페이지로 다시 보내줌
 			System.out.println("로그인 실패!");
-			request.setAttribute("user", userName); // userName은 다시 보내줌
+			request.setAttribute("user", username); // userName은 다시 보내줌
 			request.setAttribute("message", "로그인에 실패하였습니다."); // userName은 다시 보내줌
 			// 로그인 실패 내용을 포워드로 다시 로그인 페이지에 보여주기
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login/login.jsp");
