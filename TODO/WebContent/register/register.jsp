@@ -16,8 +16,9 @@ pageEncoding="UTF-8"%>
     <jsp:include page="../common/header.jsp" />
     <!-- 본문 -->
     <div class="container">
-      <h2>유저 등록</h2>
-      <div class="col-md6">
+      <div class="row mt-5">
+      <div class="col-md-6 mx-auto">
+        <h2>유저 등록</h2>
         <div class="alert alert-success center" role="alert">
           <p>${MESSAGE}</p>
         </div>
@@ -43,6 +44,7 @@ pageEncoding="UTF-8"%>
               가입하기
             </button>
           </div>
+        </div>
         </form>
       </div>
     </div>

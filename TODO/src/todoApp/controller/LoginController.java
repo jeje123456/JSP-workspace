@@ -25,9 +25,9 @@ public class LoginController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.setAttribute("user", "");
-		session.setAttribute("message", "");
+		//HttpSession session = request.getSession();
+		//session.setAttribute("user", "");
+		//session.setAttribute("message", "");
 		
 		// 로그인 페이지로 이동
 		response.sendRedirect("login/login.jsp"); // 로그인 폴더 안의 login.jsp 페이지로 이동
@@ -50,12 +50,12 @@ public class LoginController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		else { // 계정 없음 -> 로그인 실패 -> 로그인페이지로 다시 보내줌
-			//response.sendRedirect("login/login.jsp"); // 모든 입력데이터가 사라짐(페이지 새로 열기)
 			System.out.println("로그인 실패!");
-			HttpSession session = request.getSession();
-			session.setAttribute("user", userName); // userName은 다시 보내줌
-			session.setAttribute("message", "로그인에 실패하였습니다."); // userName은 다시 보내줌
-			response.sendRedirect("login/login.jsp");
+			request.setAttribute("user", userName); // userName은 다시 보내줌
+			request.setAttribute("message", "로그인에 실패하였습니다."); // userName은 다시 보내줌
+			// 로그인 실패 내용을 포워드로 다시 로그인 페이지에 보여주기
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login/login.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
