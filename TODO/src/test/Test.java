@@ -12,7 +12,7 @@ public class Test {
 		
 		TodoDaoImpl dao = new TodoDaoImpl();
 		
-		Todo todo1 = new Todo(1L, "할일 1", "drv98", "첫번째 할일", LocalDate.parse("2022-01-30"), false);
+		Todo todo1 = new Todo("할일 1", "drv98", "첫번째 할일", LocalDate.parse("2022-01-30"), false);
 		// LocalDate.parse(문자열) -> 문자열을 LocalDate형으로 형변환
 		
 		 //dao.insertTodo(todo1); // DB에 입력되었는지 확인
@@ -22,7 +22,7 @@ public class Test {
 		
 		//dao.deleteTodo(1);
 		
-		//Todo todo2 = new Todo(2L, "할일 1수정", "hong", "첫번째 할일수정", LocalDate.parse("2022-01-22"), true);
+		//Todo todo2 = new Todo("할일 1수정", "hong", "첫번째 할일수정", LocalDate.parse("2022-01-22"), true);
 		//dao.insertTodo(todo1);
 		//dao.updateTodo(todo2); // 할일 업데이트 확인
 		

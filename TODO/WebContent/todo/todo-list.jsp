@@ -34,7 +34,7 @@
 					</ul>
 					<ul class="navbar-nav mb-2">
 						<li class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>/register/logout">로그아웃</a></li>
+							href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
 					</ul>
 				</div>
 			</div>
@@ -67,7 +67,9 @@
 						<td><c:out value="${todo.status}" /></td>
 						<td>
 						<a href="<%=request.getContextPath()%>/edit?id=<c:out value='${todo.id}' />" class="btn btn-info btn-sm">수정</a>
-						<a href="<%=request.getContextPath()%>/delet?id=<c:out value='${todo.id}' />" class="btn btn-danger btn-sm">삭제</a>
+						<a href="<%=request.getContextPath()%>/delete?id=<c:out value='${todo.id}' />" 
+						onclick="if(!confirm('삭제하시겠습니까?')) return false" 
+						class="btn btn-danger btn-sm">삭제</a>
 						</td>
 					</tr>
 				</c:forEach>

@@ -69,7 +69,7 @@
           	</div>
           	<div class="form-group">
           		<label>현재 상태</label>
-          		<select class="form-control" name="isDone">
+          		<select class="form-control" name="status">
           			<option value="false">진행중</option>
           			<option value="true">완료</option>
           		</select>
