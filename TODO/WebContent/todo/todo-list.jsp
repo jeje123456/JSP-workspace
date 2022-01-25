@@ -6,9 +6,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" />
-    <title>To do 리스트</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" />
+    <title>Todo리스트</title>
   </head>
   <body>
     <header>
@@ -28,21 +28,27 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/list">ToDo 리스트</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/todos?action=list">ToDo 리스트</a>
+              </li>
             </ul>
             <ul class="navbar-nav mb-2">
-              <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/logout">로그아웃</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/todos?action=logout">로그아웃</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
+
+    <!-- 네브바 끝 -->
     <!-- 본문 -->
     <div class="container mt-5">
-      <h3 class="text-center">할 일 목록들</h3>
+      <h3 class="text-center">할일 목록들</h3>
       <hr />
       <div class="container text-left">
-        <a href="<%=request.getContextPath()%>/new" class="btn btn-success">할 일 추가</a>
+        <a href="<%=request.getContextPath()%>/todos?action=new" class="btn btn-success">할일 추가</a>
       </div>
       <br />
       <table class="table table-bordered">
@@ -55,18 +61,18 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 할 일 데이터(동적 데이터)를 테이블로  -->
-          <!-- 컨트롤러에서 DB에 있는 할 일 리스트를 읽어서 보내줌, 1개의 할일 = todo-->
+          <!-- 할일 데이터를 테이블로 -->
           <c:forEach var="todo" items="${listTodo}">
             <tr>
               <td><c:out value="${todo.title}" /></td>
               <td><c:out value="${todo.targetDate}" /></td>
               <td class="status"><c:out value="${todo.status}" /></td>
+
               <td>
-                <a href="<%=request.getContextPath()%>/edit?id=<c:out value='${todo.id}' />" class="btn btn-info btn-sm">수정</a>
+                <a href="<%=request.getContextPath()%>/todos?action=edit&id=<c:out value='${todo.id}'/>" class="btn btn-info btn-sm">수정</a>
                 <a
-                  href="<%=request.getContextPath()%>/delete?id=<c:out value='${todo.id}' />"
-                  onclick="if(!confirm('삭제하시겠습니까?')) return false"
+                  href="<%=request.getContextPath()%>/todos?action=delete&id=<c:out value='${todo.id}'/>"
+                  onclick="if(!confirm('삭제하겠습니까?')) return false"
                   class="btn btn-danger btn-sm"
                   >삭제</a
                 >
@@ -75,11 +81,17 @@
           </c:forEach>
         </tbody>
       </table>
+      <div class="row mt-5">
+        <div class="col-4 mx-auto">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
     </div>
     <!-- 본문 끝 -->
-    <jsp:include page="../common/footer.jsp"></jsp:include>
+    <jsp:include page="../common/footer.jsp" />
 
-    <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/todo.js"></script>
+    <script src="<%=request.getContextPath() %>/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="<%=request.getContextPath() %>/js/todo.js"></script>
   </body>
 </html>

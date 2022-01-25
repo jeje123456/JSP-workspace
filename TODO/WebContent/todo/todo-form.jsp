@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- jstl 사용을 위해 jstl 태그 추가 -->
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" />
-    <title>To do Form</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" />
+    <title>Todo Form</title>
   </head>
   <body>
     <header>
@@ -28,15 +26,20 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/list">ToDo 리스트</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/todos?action=list">ToDo 리스트</a>
+              </li>
             </ul>
             <ul class="navbar-nav mb-2">
-              <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/register/logout">로그아웃</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/todos/logout">로그아웃</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
+    <!-- 네브바 끝 -->
     <!-- 본문 -->
     <div class="container">
       <div class="row mt-5">
@@ -44,10 +47,12 @@
           <div class="card card-body">
           <!-- 만약에 todo가 널이면 새로 입력 / todo가 있으면 업데이트 -->
           	<c:if test="${todo != null}">
-          		<form action="update">
+          		<form action="<%=request.getContextPath()%>/todos">
+          		<input type="hidden" name="action" value="update" >
           	</c:if>
           	<c:if test="${todo == null}">
-          		<form action="insert">
+          		<form action="<%=request.getContextPath()%>/todos">
+          		<input type="hidden" name="action" value="post" >
           	</c:if>
           	
           	<h2>
@@ -83,14 +88,15 @@
           		<button type="submit" class="btn btn-info">저장</button>
           	</div>
           	
-          	</form>
+          	</form> 
+          	        	
           </div>
         </div>
       </div>
     </div>
     <!-- 본문 끝 -->
-    <jsp:include page="../common/footer.jsp"></jsp:include>
+    <jsp:include page="../common/footer.jsp" />
 
-    <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

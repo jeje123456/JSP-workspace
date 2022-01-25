@@ -18,7 +18,7 @@ import todoApp.dao.TodoDaoImpl;
 import todoApp.model.Todo;
 
 // 서블릿이 기본"/"주소이면 다른 서블릿 "/resister", "/login" 등을 제외한 모든 요청을 여기에서 처리한다.
-@WebServlet("/")
+@WebServlet("/todos")
 public class TodoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TodoDao todoDAO;
@@ -36,25 +36,27 @@ public class TodoController extends HttpServlet {
 			throws ServletException, IOException {
 		// getcontextPath() : localhost:8090/TODO 까지의 주소
 		// getServletPath() : 요청주소가 localhost:8090/TODO/new => "/new" 가 action의 값
-		String action = request.getServletPath();
+		//String action = request.getServletPath();
+
+		String action = request.getParameter("action");
 
 		switch (action) {
-		case "/new":
+		case "new":
 			showNewForm(request, response);
 			break;
-		case "/insert":
+		case "insert":
 			insertTodo(request, response);
 			break;
-		case "/delete":
+		case "delete":
 			deleteTodo(request, response);
 			break;
-		case "/edit": // 수정 form을 보여줌
+		case "edit": // 수정 form을 보여줌
 			showEditForm(request, response);
 			break;
-		case "/update":
+		case "update":
 			updateTodo(request, response);
 			break;
-		case "/list":
+		case "list":
 			listTodo(request, response);
 			break;
 		default: // 요청 주소가 기본 또는 잘못 되었을 경우 로그인 페이지로 이동
@@ -99,7 +101,7 @@ public class TodoController extends HttpServlet {
 		Todo newTodo = new Todo(title, username, description, targetDate, isDone);
 		todoDAO.insertTodo(newTodo);
 		
-		response.sendRedirect("list"); // 새 할일을 저장 후에 리스트 페이지로 이동
+		response.sendRedirect("todos?action=list"); // 새 할일을 저장 후에 리스트 페이지로 이동
 	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -126,14 +128,14 @@ public class TodoController extends HttpServlet {
 		Todo updateTodo = new Todo(id, title, username, description, targetDate, isDone);
 		todoDAO.updateTodo(updateTodo);
 		
-		response.sendRedirect("list"); // 할일을 수정한 후에 리스트 페이지로 이동
+		response.sendRedirect("todos?action=list"); // 할일을 수정한 후에 리스트 페이지로 이동
 	}
 	
 	private void deleteTodo(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		 Long id = Long.parseLong(request.getParameter("id")); //id를 받음
 		 todoDAO.deleteTodo(id);
 		 
-		 response.sendRedirect("list"); // 할일을 삭제한 후에 리스트 페이지로 이동
+		 response.sendRedirect("todos?action=list"); // 할일을 삭제한 후에 리스트 페이지로 이동
 	}
 
 	
