@@ -53,7 +53,7 @@ public class ContactDao {
 		return list;
 	}
 
-	private void closeAll() {
+	private void closeAll() { // 모든 DB 연결 객체들을 닫아주는 메소드
 
 		try {
 			// 순서 있음 : 나중에 연 순서부터 닫음 rs -> pstmt -> conn(풀로 되돌아감)
