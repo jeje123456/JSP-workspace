@@ -123,7 +123,10 @@ public class ContactDao {
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement("update contacts set name = ?, email = ?, phone = ? where id = ?");
-			// 직접 만들어 보자
+			pstmt.setString(1, contact.getName());
+			pstmt.setString(2, contact.getEmail());
+			pstmt.setString(3, contact.getPhone());
+			pstmt.setInt(4, contact.getId());
 
 			rowAffected = pstmt.executeUpdate() > 0;
 

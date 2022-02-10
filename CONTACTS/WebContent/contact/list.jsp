@@ -48,7 +48,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form autocomplete="off" method="post">
+      <form id="add-update" autocomplete="off">
         <div class="modal-body">
           <div class="form-group">
             <label for="name">name</label>
@@ -66,14 +66,14 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success btn-action">저장</button>
-          <button type="button" class="btn btn-secondary btn-action" data-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-success">저장</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-
+<%-- 삭제 모달 창 --%>
 <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -88,7 +88,7 @@
       </div>
       <div class="modal-footer">
         <form id="frm-delete">
-          <input type="hidden" name="cmd" value="del" />
+          <input type="hidden" name="cmd" value="delete" />
           <input type="hidden" name="id" value="" />
           <button type="submit" class="btn btn-danger btn-action">삭제</button>
         </form>
