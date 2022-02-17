@@ -1,4 +1,4 @@
-package page;
+package beans;
 
 public class OrderList {
 	private int orderID;
@@ -14,7 +14,7 @@ public class OrderList {
 	private int totalPrice;
 	private String farmID;
 	private String farmTel;
-	private Boolean farmCheck;
+	private boolean farmCheck;
 	private int trackNum;
 	private String is_status;
 	
@@ -96,7 +96,7 @@ public class OrderList {
 	public void setFarmTel(String farmTel) {
 		this.farmTel = farmTel;
 	}
-	public Boolean getFarmCheck() {
+	public boolean getFarmCheck() {
 		return farmCheck;
 	}
 	public void setFarmCheck(Boolean farmCheck) {

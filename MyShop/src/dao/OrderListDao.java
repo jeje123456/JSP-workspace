@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import page.OrderList;
+import beans.OrderList;
 
 public class OrderListDao {
 	private DataSource dataSource; // jdbc/shop 커넥션 풀 연결 객체
@@ -86,7 +86,7 @@ public class OrderListDao {
 				order.setTotalPrice(rs.getInt("totalPrice"));
 				order.setFarmID(rs.getString("farmID"));
 				order.setFarmTel(rs.getString("farmTel"));
-				order.setFarmCheck(rs.getString("farmCheck"));
+				order.setFarmCheck(rs.getBoolean("farmCheck"));
 				order.setTrackNum(rs.getInt("trackNum"));
 				order.setIs_status(rs.getString("is_status"));
 				

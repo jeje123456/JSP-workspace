@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import beans.OrderList;
 import dao.OrderListDao;
-import page.OrderList;
 
 @WebServlet("/managerOrderlist")
 public class OrderListController extends HttpServlet {
