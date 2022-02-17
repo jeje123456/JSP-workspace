@@ -34,6 +34,10 @@ public class ContactController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 출력 확인
+		//List<ManagerOrder> ordersList = managerOrderDao.findAll();
+		//ordersList.forEach(ManagerOrder -> System.out.println(ManagerOrder.toString()));
+		
 		req.setCharacterEncoding("UTF8");
 		// 파라메타 cmd 값을 읽어서 액션으로 저장하는데 만약 값이 null이 아니면 req.getParameter("cmd")가 들어가고 null이면 "list"로 대체
 		String action = req.getParameter("cmd") != null ? req.getParameter("cmd") : "list";
