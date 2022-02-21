@@ -24,12 +24,12 @@
 				<div class="navbar-nav">
 					<a id="m-product" class="nav-link" href="<%=request.getContextPath()%>/managerProduct">농산물</a> <a
 						id="m-review" class="nav-link" href="<%=request.getContextPath()%>/managerReview">리뷰</a> <a
-						id="m-member" class="nav-link" href="<%=request.getContextPath()%>/managerMember">농민·회원 관리</a>
-					<a id="m-order" class="nav-link" href="<%=request.getContextPath()%>/managerOrderlist?action=list">주문
+						id="m-member" class="nav-link" href="<%=request.getContextPath()%>/member?cmd=memberList">농민·회원 관리</a>
+					<a id="m-order" class="nav-link" href="<%=request.getContextPath()%>/managerOrderlist?cmd=list">주문
 						내역 관리</a>
 				</div>
 				<div class="navbar-nav ml-auto">
-					<a class="nav-link" href="<%=request.getContextPath()%>/login/logout.jsp">로그아웃</a>
+					<a class="btn btn-primary me-2" href="<%=request.getContextPath()%>/login/logout.jsp" role="button">로그아웃</a>
 				</div>
 			</div>
 		</nav>

@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
+
+import beans.Farmer;
 
 public class FarmerDAO {
 	private DataSource dataSource; // jdbc/demo 커넥션 풀 연결 객체
@@ -60,6 +64,53 @@ public class FarmerDAO {
 		} catch (Exception e) {
 			System.out.println("DB연결 닫을 때 에러발생");
 		}
+	}
+	
+	public List<Farmer> findAllFarmer() throws SQLException{
+		List<Farmer> farmerList = new ArrayList<Farmer>();
+		
+		try {
+		conn = dataSource.getConnection(); // DB연결
+		pstmt = conn.prepareStatement("SELECT * FROM farmer"); // sql문
+		rs = pstmt.executeQuery();
+		
+		while (rs.next()) { // 반복문으로 orders 리스트 저장
+			String farmID = rs.getString("farmID");
+			String farmPassword = rs.getString("farmPassword");
+			String farmName = rs.getString("farmName");
+			String farmAdd = rs.getString("farmAdd");
+			String farmTel = rs.getString("farmTel");
+			
+			farmerList.add(new Farmer(farmID, farmPassword, farmName, farmAdd, farmTel));
+		}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("농민 리스트 전체 출력 SQL에러");
+		}
+		
+		System.out.println("전체 농민 리스트 출력 성공");
+		return farmerList;
+	}
+	
+	public boolean delete(String farmID) {
+		boolean rowDeleted = false;
+
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement("delete from farmer where farmID = ?");
+			pstmt.setString(1, farmID);
+
+			rowDeleted = pstmt.executeUpdate() > 0; // 실제 쿼리를 실행 -> 삭제되면 true
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		System.out.println("농민 삭제 성공");
+		return rowDeleted;
 	}
 	
 }

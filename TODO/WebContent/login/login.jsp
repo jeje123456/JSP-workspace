@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" />
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/assets/images/icon.png" type="image/x-icon" />
     <title>로그인</title>
   </head>
   <body>

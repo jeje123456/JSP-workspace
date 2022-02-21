@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
+
+import beans.User;
 
 public class UserDAO {
 	private DataSource dataSource; // jdbc/demo 커넥션 풀 연결 객체
@@ -61,5 +65,53 @@ public class UserDAO {
 			System.out.println("DB연결 닫을 때 에러발생");
 		}
 	}
+	
+	public List<User> findAllUser() throws SQLException{
+		List<User> userList = new ArrayList<User>();
+		
+		try {
+		conn = dataSource.getConnection(); // DB연결
+		pstmt = conn.prepareStatement("SELECT * FROM user"); // sql문
+		rs = pstmt.executeQuery();
+		
+		while (rs.next()) { // 반복문으로 orders 리스트 저장
+			String userID = rs.getString("userID");
+			String userPassword = rs.getString("userPassword");
+			String userName = rs.getString("userName");
+			String userAdd = rs.getString("userAdd");
+			String userTel = rs.getString("userTel");
+			
+			userList.add(new User(userID, userPassword, userName, userAdd, userTel));
+		}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("전체 고객 리스트 출력 SQL에러");
+		}
+		
+		System.out.println("고객 리스트 전체 출력 성공");
+		return userList;
+	}
+	
+	public boolean delete(String userID) {
+		boolean rowDeleted = false;
+
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement("delete from user where userID = ?");
+			pstmt.setString(1, userID);
+
+			rowDeleted = pstmt.executeUpdate() > 0; // 실제 쿼리를 실행 -> 삭제되면 true
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}
+
+		System.out.println("고객 삭제 성공");
+		return rowDeleted;
+	}
+
 	
 }

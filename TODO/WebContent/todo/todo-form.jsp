@@ -45,7 +45,7 @@
       <div class="row mt-5">
         <div class="col-md-6 mx-auto">
           <div class="card card-body">
-          <!-- 만약에 todo가 널이면 새로 입력 / todo가 있으면 업데이트 -->
+          <!-- 만약에 todo가 있으면 업데이트 / todo가 널이면 리스트 출력-->
           	<c:if test="${todo != null}">
           		<form action="<%=request.getContextPath()%>/todos">
           		<input type="hidden" name="action" value="update" >
