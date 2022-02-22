@@ -53,19 +53,20 @@ public class ReviewDao {
 		return list;
     }
     
-    public Review find(int id) {
+    public Review find(int reviewID) {
     	// 받아온 reviewID로 같은 값을 가진 행을 찾아 출력
     	Review review = null;
     	
     	try {
 			conn = datasource.getConnection();
-			pstmt = conn.prepareStatement("select * from review where reviewID=?");
-			pstmt.setInt(1, id);
+			pstmt = conn.prepareStatement("select * from review where reviewID = ?");
+			pstmt.setInt(1, reviewID);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				// rs에 리턴받은 데이터를 속성별로 review객체에 저장
 				review = new Review();	// 여기서 ""내부는 DB의 속성이름과 같아야함
+				
 				review.setReviewID(rs.getInt("reviewID"));
 				review.setReviewTitle(rs.getString("reviewTitle"));;
 				review.setUserID(rs.getString("userID"));
@@ -83,18 +84,19 @@ public class ReviewDao {
     	return review;
     }
     
-    public List<Review> findProd(int id) {
+    public List<Review> findProd(int prodID) {
     	// 받아온 prodID로 같은 값을 가진 리뷰들을 모두 출력
-    	List<Review> list = new ArrayList<>();
+    	List<Review> reviewList = new ArrayList<>();
     	
     	try {
     		conn = datasource.getConnection();
 			pstmt = conn.prepareStatement("select * from review where prodID=?");
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, prodID);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				Review review = new Review();
+				
 				review.setReviewID(rs.getInt("reviewID"));
 				review.setUserID(rs.getString("userID"));
 				review.setReviewTitle(rs.getString("reviewTitle"));
@@ -102,7 +104,7 @@ public class ReviewDao {
 				review.setReviewContent(rs.getString("reviewContent"));
 				review.setProdID(rs.getInt("prodID"));
 				
-				list.add(review);
+				reviewList.add(review);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL에러 - review findProd");
@@ -111,7 +113,7 @@ public class ReviewDao {
 			closeAll();
 		}
     	
-		return list;
+		return reviewList;
     }
     
 	public boolean delete(int reviewID) {

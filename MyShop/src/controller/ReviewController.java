@@ -33,29 +33,10 @@ public class ReviewController extends HttpServlet {
 		reviewDao = new ReviewDao(datasource);
 		replyDao = new ReplyDao(datasource);
 	}
-       
-
-    public ReviewController() {
-        super();
-    }
-
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// 전체출력 테스트용
-//		List<Review> list = reviewDao.findAll();
-//		list.forEach(review -> System.out.println(review.toString()));
-//		System.out.println(reviewDao.find(1));
-//		System.out.println(reviewDao.findProd(1));
-		
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("cmd");
-		
-		if(action == null) {
-			action = "list";
-		}
-		
 		try {
 			
 			switch (action) {
@@ -76,12 +57,13 @@ public class ReviewController extends HttpServlet {
 				break;
 			}
 		} finally {}
+		
 	}
 	
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		int id = Integer.parseInt(request.getParameter("reviewID")); 
+		int reviewID = Integer.parseInt(request.getParameter("reviewID")); 
 		
-		boolean delete = reviewDao.delete(id);
+		boolean delete = reviewDao.delete(reviewID);
 		
 		if(delete) {
 			list(request, response);
@@ -94,10 +76,10 @@ public class ReviewController extends HttpServlet {
 
 	private void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 리뷰상세페이지에 접속했을때 해당리뷰 하나의 모든 정보를 나열하도록
-		int id = Integer.parseInt(request.getParameter("id"));
+		int reviewID = Integer.parseInt(request.getParameter("reviewID"));
 		
-		Review review = reviewDao.find(id);
-		Reply reply = replyDao.find(id);
+		Review review = reviewDao.find(reviewID);
+		Reply reply = replyDao.find(reviewID);
 		
 		if(review != null) {
 			request.setAttribute("review", review);
@@ -115,12 +97,12 @@ public class ReviewController extends HttpServlet {
 	
 	private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 상품상세페이지에서 리뷰를 보러갈때: 각 리뷰에 저장된 prodID로 검색해 해당상품의 리뷰만 띄워줌 
-		int id = Integer.parseInt(request.getParameter("id"));
+		int prodID = Integer.parseInt(request.getParameter("prodID"));
 		
-		List<Review> reviews = reviewDao.findProd(id);	// DB에서 조건에 맞는 모든 리뷰를 가져옴
+		List<Review> reviews = reviewDao.findProd(prodID);	// DB에서 조건에 맞는 모든 리뷰를 가져옴
 		
 		request.setAttribute("reviews", reviews); 	// "reviews"에는 key값, reviews에는 실제 값이 저장됨
-		RequestDispatcher rd = request.getRequestDispatcher("reviewFar.jsp");	// forward해주기 위해 RequestDispatcher로 리퀘스트를 유지함
+		RequestDispatcher rd = request.getRequestDispatcher("review/reviewDetail.jsp");	// forward해주기 위해 RequestDispatcher로 리퀘스트를 유지함
 		rd.forward(request, response);
 	}
 

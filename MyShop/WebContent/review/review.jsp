@@ -21,7 +21,7 @@
           <tr>
             <td><c:out value="${reviews.reviewID}" /></td>
             <td>
-              <a href="<%= request.getContextPath() %>/reviewController?cmd=view&id=<c:out value='${reviews.reviewID}'/>"><c:out value="${reviews.reviewTitle}" /></a>
+              <a href="<%= request.getContextPath() %>/reviewController?cmd=view&reviewID=<c:out value='${reviews.reviewID}'/>"><c:out value="${reviews.reviewTitle}" /></a>
             </td>
             <td><c:out value="${reviews.userID}" /></td>
             <td><c:out value="${reviews.reviewDate}" /></td>

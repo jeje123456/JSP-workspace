@@ -33,7 +33,7 @@ h3{
     <p>판매자ID: <c:out value="${product.farmID}" /></p>
     <p>가격: <c:out value="${product.prodPrice}" />원</p>
     <p>남은수량: <c:out value="${product.prodInven}" />개</p>
-    <a class="btn btn-secondary mt-auto" href="<%= request.getContextPath() %>/reviewController?cmd=find&id=<c:out value="${product.prodID}" />">리뷰보기</a>
+    <a class="btn btn-secondary mt-auto" href="<%= request.getContextPath() %>/reviewController?cmd=find&prodID=<c:out value="${product.prodID}" />">리뷰보기</a>
     <button type="button" class="btn btn-info mt-auto btn-edit" data-id="<c:out value='${product.prodID}' />">수정</button>
     <button type="button" class="btn btn-danger mt-auto btn-delete" data-id="<c:out value='${product.prodID}' />" data-toggle="modal" data-target="#modal-delete">삭제</button>
   </div>
