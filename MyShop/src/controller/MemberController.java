@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 import beans.Farmer;
 import beans.User;
 import dao.FarmerDAO;
-import dao.OrderListDAO;
 import dao.UserDAO;
 
 @WebServlet("/member")
@@ -97,7 +96,7 @@ public class MemberController extends HttpServlet {
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String userID = (String)(request.getParameter("userID"));
-		userDao.delete(userID);
+		userDao.deleteUser(userID);
 		
 		response.sendRedirect("member?cmd=userList");
 		
@@ -105,7 +104,7 @@ public class MemberController extends HttpServlet {
 
 	private void deleteFarmer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String farmID = (String)(request.getParameter("farmID"));
-		farmerDao.delete(farmID);
+		farmerDao.deleteFarmer(farmID);
 		
 		response.sendRedirect("member?cmd=farmerList");
 		

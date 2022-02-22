@@ -11,22 +11,21 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css" />
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/assets/images/icon.png" type="image/x-icon" />
+
 <title>못난이 농산품</title>
+
 </head>
 
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a id="m-home" class="nav-link"
-				href="<%=request.getContextPath()%>/home/managerMain.jsp">🥦못난이
-				농산품</a>
+			<a id="m-home" class="nav-link" href="<%=request.getContextPath()%>/home/managerMain.jsp">🥦못난이 농산품</a>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a id="m-product" class="nav-link" href="<%=request.getContextPath()%>/managerProduct">농산물</a> <a
-						id="m-review" class="nav-link" href="<%=request.getContextPath()%>/managerReview">리뷰</a> <a
-						id="m-member" class="nav-link" href="<%=request.getContextPath()%>/member?cmd=memberList">농민·회원 관리</a>
-					<a id="m-order" class="nav-link" href="<%=request.getContextPath()%>/managerOrderlist?cmd=list">주문
-						내역 관리</a>
+					<a id="m-product" class="nav-link" href="<%=request.getContextPath()%>/managerProduct">농산물</a> 
+					<a id="m-review" class="nav-link" href="<%=request.getContextPath()%>/managerReview">리뷰</a> 
+					<a id="m-member" class="nav-link" href="<%=request.getContextPath()%>/member?cmd=memberList">농민·회원 관리</a>
+					<a id="m-order" class="nav-link" href="<%=request.getContextPath()%>/managerOrderlist?cmd=list">주문 내역 관리</a>
 				</div>
 				<div class="navbar-nav ml-auto">
 					<a class="btn btn-primary me-2" href="<%=request.getContextPath()%>/login/logout.jsp" role="button">로그아웃</a>

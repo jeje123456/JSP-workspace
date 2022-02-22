@@ -85,7 +85,7 @@
 <script>
   $('.nav-link').removeClass('active');
   $('#m-order').addClass('active');
-  var path = '<%=request.getContextPath()%> ';
+  var path = '<%= request.getContextPath() %>';
 </script>
 
-<script src="assets/js/ordersList.js"></script>
+<script src="assets/js/list.js"></script>

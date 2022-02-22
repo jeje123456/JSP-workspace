@@ -93,7 +93,7 @@ public class FarmerDAO {
 		return farmerList;
 	}
 	
-	public boolean delete(String farmID) {
+	public boolean deleteFarmer(String farmID) {
 		boolean rowDeleted = false;
 
 		try {

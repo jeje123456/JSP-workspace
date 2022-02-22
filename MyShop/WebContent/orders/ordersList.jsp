@@ -60,4 +60,4 @@
   var path = '<%= request.getContextPath() %>';
 </script>
 
-<script src="assets/js/ordersList.js"></script>
+<script src="assets/js/list.js"></script>

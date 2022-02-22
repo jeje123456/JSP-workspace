@@ -93,7 +93,7 @@ public class UserDAO {
 		return userList;
 	}
 	
-	public boolean delete(String userID) {
+	public boolean deleteUser(String userID) {
 		boolean rowDeleted = false;
 
 		try {

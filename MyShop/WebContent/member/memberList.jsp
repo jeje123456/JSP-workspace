@@ -85,7 +85,7 @@
 					<td><c:out value="${farmer.farmAdd}" /></td>
 					<td><c:out value="${farmer.farmTel}" /></td>
 					<td class="th-1"><a
-						href="<%=request.getContextPath()%>/member?cmd=deleteUser&farmID=<c:out value='${farmer.farmID}'/>"
+						href="<%=request.getContextPath()%>/member?cmd=deleteFarmer&farmID=<c:out value='${farmer.farmID}'/>"
 						onclick="if(!confirm('삭제하겠습니까?')) return false"
 						class="btn btn-danger btn-sm">삭제</a></td>
 				</tr>
@@ -105,9 +105,8 @@
 
 <script>
   $('.nav-link').removeClass('active');
-  $('#m-order').addClass('active');
-  var path = '<%=request.getContextPath()%>
-	';
+  $('#m-member').addClass('active');
+  var path = '<%=request.getContextPath()%> ';
 </script>
 
-<script src="assets/js/ordersList.js"></script>
+<script src="assets/js/list.js"></script>
