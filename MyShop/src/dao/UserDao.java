@@ -75,13 +75,15 @@ public class UserDao {
 		rs = pstmt.executeQuery();
 		
 		while (rs.next()) { // 반복문으로 orders 리스트 저장
-			String userID = rs.getString("userID");
-			String userPassword = rs.getString("userPassword");
-			String userName = rs.getString("userName");
-			String userAdd = rs.getString("userAdd");
-			String userTel = rs.getString("userTel");
+			User user = new User();
 			
-			userList.add(new User(userID, userPassword, userName, userAdd, userTel));
+			user.setUserID(rs.getString("userID"));
+			user.setUserPassword(rs.getString("userPassword"));
+			user.setUserName(rs.getString("userName"));
+			user.setUserAdd(rs.getString("userAdd"));
+			user.setUserTel(rs.getString("userTel"));
+			
+			userList.add(user);
 		}
 		
 		} catch (Exception e) {

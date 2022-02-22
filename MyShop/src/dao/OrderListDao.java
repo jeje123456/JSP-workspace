@@ -30,26 +30,27 @@ public class OrderListDao {
 			pstmt = conn.prepareStatement("SELECT * FROM `order`"); // sql문
 			rs = pstmt.executeQuery(); // 쿼리문 실행
 
-			while (rs.next()) { // 반복문으로 orders 리스트 저장
-				int orderId = rs.getInt("orderID");
-				int cartID = rs.getInt("cartID");
-				String userID = rs.getString("userID");
-				String userName = rs.getString("userName");
-				String userAdd = rs.getString("userAdd");
-				String userTel = rs.getString("userTel");
-				int prodID = rs.getInt("prodID");
-				String prodName = rs.getString("prodName");
-				int prodPrice = rs.getInt("prodPrice");
-				int prodQuantity = rs.getInt("prodQuantity");
-				int totalPrice = rs.getInt("totalPrice");
-				String farmID = rs.getString("farmID");
-				String farmTel = rs.getString("farmTel");
-				boolean farmCheck = rs.getBoolean("farmCheck");
-				int trackNum = rs.getInt("trackNum");
-				String is_status = rs.getString("is_status");
+			while (rs.next()) { // 반복문으로 orders 리스트 저장			
+				Order order = new Order();
 				
-				ordersList.add(new Order(orderId, cartID, userID, userName, userAdd, userTel, prodID, prodPrice, prodName, prodQuantity, totalPrice, farmID, farmTel, farmCheck, trackNum, is_status));
+				order.setOrderID(rs.getInt("orderID"));
+				order.setCartID(rs.getInt("cartID"));
+				order.setUserID(rs.getString("userID"));
+				order.setUserAdd(rs.getString("userAdd"));
+				order.setUserTel(rs.getString("userTel"));
+				order.setProdID(rs.getInt("prodID"));
+				order.setProdName(rs.getString("prodName"));
+				order.setProdPrice(rs.getInt("prodPrice"));
+				order.setOrderQuantity(rs.getInt("orderQuantity"));
+				order.setProdQuantity(rs.getInt("prodQuantity"));
+				order.setTotalPrice(rs.getInt("totalPrice"));
+				order.setFarmID(rs.getString("farmID"));
+				order.setFarmTel(rs.getString("farmTel"));
+				order.setFarmCheck(rs.getBoolean("farmCheck"));
+				order.setTrackNum(rs.getInt("trackNum"));
+				order.setIs_status( rs.getString("is_status"));
 				
+				ordersList.add(order);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,25 +73,24 @@ public class OrderListDao {
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				int orderId = rs.getInt("orderID");
-				int cartID = rs.getInt("cartID");
-				String userID = rs.getString("userID");
-				String userName = rs.getString("userName");
-				String userAdd = rs.getString("userAdd");
-				String userTel = rs.getString("userTel");
-				int prodID = rs.getInt("prodID");
-				String prodName = rs.getString("prodName");
-				int prodPrice = rs.getInt("prodPrice");
-				int prodQuantity = rs.getInt("prodQuantity");
-				int totalPrice = rs.getInt("totalPrice");
-				String farmID = rs.getString("farmID");
-				String farmTel = rs.getString("farmTel");
-				boolean farmCheck = rs.getBoolean("farmCheck");
-				int trackNum = rs.getInt("trackNum");
-				String is_status = rs.getString("is_status");
+				order = new Order();
 				
-				order = new Order(orderId, cartID, userID, userName, userAdd, userTel, prodID, prodPrice, prodName, prodQuantity, totalPrice, farmID, farmTel, farmCheck, trackNum, is_status);
-				
+				order.setOrderID(rs.getInt("orderID"));
+				order.setCartID(rs.getInt("cartID"));
+				order.setUserID(rs.getString("userID"));
+				order.setUserAdd(rs.getString("userAdd"));
+				order.setUserTel(rs.getString("userTel"));
+				order.setProdID(rs.getInt("prodID"));
+				order.setProdName(rs.getString("prodName"));
+				order.setProdPrice(rs.getInt("prodPrice"));
+				order.setOrderQuantity(rs.getInt("orderQuantity"));
+				order.setProdQuantity(rs.getInt("prodQuantity"));
+				order.setTotalPrice(rs.getInt("totalPrice"));
+				order.setFarmID(rs.getString("farmID"));
+				order.setFarmTel(rs.getString("farmTel"));
+				order.setFarmCheck(rs.getBoolean("farmCheck"));
+				order.setTrackNum(rs.getInt("trackNum"));
+				order.setIs_status( rs.getString("is_status"));
 			}
 
 		} catch (Exception e) {

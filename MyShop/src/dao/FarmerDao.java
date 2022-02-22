@@ -75,13 +75,15 @@ public class FarmerDao {
 		rs = pstmt.executeQuery();
 		
 		while (rs.next()) { // 반복문으로 orders 리스트 저장
-			String farmID = rs.getString("farmID");
-			String farmPassword = rs.getString("farmPassword");
-			String farmName = rs.getString("farmName");
-			String farmAdd = rs.getString("farmAdd");
-			String farmTel = rs.getString("farmTel");
+			Farmer farmer = new Farmer();
 			
-			farmerList.add(new Farmer(farmID, farmPassword, farmName, farmAdd, farmTel));
+			farmer.setFarmID(rs.getString("farmID"));
+			farmer.setFarmPassword(rs.getString("farmPassword"));
+			farmer.setFarmName(rs.getString("farmName"));
+			farmer.setFarmAdd(rs.getString("farmAdd"));
+			farmer.setFarmTel(rs.getString("farmTel"));
+			
+			farmerList.add(farmer);
 		}
 		
 		} catch (Exception e) {

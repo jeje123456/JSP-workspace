@@ -54,9 +54,9 @@ public class OrderListController extends HttpServlet {
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int orderID = Integer.parseInt(request.getParameter("orderID"));//orderID를 받음
-		Order oneOrder = orderListDao.findOrderById(orderID); // 1개의 orderList를 가지고옴
+		Order order = orderListDao.findOrderById(orderID); // 1개의 orderList를 가지고옴
 		
-		request.setAttribute("order", oneOrder);
+		request.setAttribute("order", order);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("orders/showOrderEdit.jsp");
 		dispatcher.forward(request, response); // 리퀘스트를 유지하면서 showOrderEdit.jsp페이지로 이동
@@ -74,12 +74,7 @@ public class OrderListController extends HttpServlet {
 		boolean farmCheck = Boolean.parseBoolean(request.getParameter("farmCheck"));
 		int trackNum = Integer.parseInt(request.getParameter("trackNum"));
 		String is_status = request.getParameter("is_status");
-		
-		System.out.println("orderID :" + orderID);
-		System.out.println("farmCheck :" + farmCheck);
-		System.out.println("trackNum :" + trackNum);
-		System.out.println("is_status :" + is_status);
-		
+
 		orderListDao.update(orderID, farmCheck, trackNum, is_status);
 		
 		response.sendRedirect("managerOrderlist?cmd=list");

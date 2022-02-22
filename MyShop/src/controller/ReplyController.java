@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -109,15 +108,14 @@ public class ReplyController extends HttpServlet {
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 덧글삭제버튼을 눌렀을때 덧글삭제메서드가 실행되도록
-		int id = Integer.parseInt(request.getParameter("replyID"));	// replyID를 가져옴
-		boolean isDeleted = replyDao.delete(id);
-		if(isDeleted) {
-			response.sendRedirect("reviewController");	 // 테스트용 페이지 단순이동(정보 안갖고 이동)
-
-//			RequestDispatcher rd = request.getRequestDispatcher("reviewDetailFar.jsp");	// forward해주기 위해 RequestDispatcher로 리퀘스트를 유지함
-//			rd.forward(request, response);
-			System.out.println("삭제왼료@@");
-			
+		int id = Integer.parseInt(request.getParameter("replyID")); 
+		
+		boolean delete = replyDao.delete(id);
+		
+		if(delete) {
+			response.sendRedirect("reviewController?cmd=list");
+		}else {
+			System.out.println("삭제실패");
 		}
 	}
 

@@ -50,22 +50,15 @@ public class ReviewController extends HttpServlet {
 //		System.out.println(reviewDao.findProd(1));
 		
 		request.setCharacterEncoding("UTF-8");
-		String action = request.getParameter("cmd") != null ? request.getParameter("cmd") : "list";
+		String action = request.getParameter("cmd");
+		
+		if(action == null) {
+			action = "list";
+		}
 		
 		try {
 			
 			switch (action) {
-//			case "post":		// 새로입력 저장
-//				save(request, response);
-//				break;
-//			case "edit":		// 수정하기 창을 표시
-//				edit(request, response);
-//				break;
-//			case "update":		// 실제 수정하는 작업
-//				update(request, response);
-//				break;
-//			case "delete":		// 삭제
-//				delete(request, response);
 			case "view":		// 리뷰상세페이지에 들어갔을때 
 				view(request, response);
 				break;
@@ -74,12 +67,31 @@ public class ReviewController extends HttpServlet {
 				break;
 			case "find":		// 상품상세페이지>리뷰보기 로 접근했을때
 				find(request, response);
+				break;
+			case "delete":
+				delete(request, response);
+				break;
 			default:			// 이외의 값이 들어오면 리뷰리스트를 보여줌
 				list(request, response);
 				break;
 			}
 		} finally {}
 	}
+	
+	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		int id = Integer.parseInt(request.getParameter("reviewID")); 
+		
+		boolean delete = reviewDao.delete(id);
+		
+		if(delete) {
+			list(request, response);
+		}else {
+			System.out.println("삭제실패");
+		}
+		
+	}
+
+
 	private void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 리뷰상세페이지에 접속했을때 해당리뷰 하나의 모든 정보를 나열하도록
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -94,7 +106,7 @@ public class ReviewController extends HttpServlet {
 				request.setAttribute("reply", reply);
 			}
 
-			RequestDispatcher rd = request.getRequestDispatcher("reviewDetailFar.jsp");	// forward해주기 위해 RequestDispatcher로 리퀘스트를 유지함
+			RequestDispatcher rd = request.getRequestDispatcher("review/reviewDetail.jsp");	// forward해주기 위해 RequestDispatcher로 리퀘스트를 유지함
 			rd.forward(request, response);
 			System.out.println("리뷰상세정보찾기 성공");
 			
@@ -116,7 +128,7 @@ public class ReviewController extends HttpServlet {
 		// 모든 리뷰를 리스트형태로 보여줄 메서드
 		List<Review> reviews = reviewDao.findAll();	// DB에서 모든 리뷰를 가져옴
 		request.setAttribute("reviews", reviews); 	// "reviews"에는 key값, reviews에는 실제 값이 저장됨
-		RequestDispatcher rd = request.getRequestDispatcher("reviewFar.jsp");	// forward해주기 위해 RequestDispatcher로 리퀘스트를 유지함
+		RequestDispatcher rd = request.getRequestDispatcher("review/review.jsp");	// forward해주기 위해 RequestDispatcher로 리퀘스트를 유지함
 		rd.forward(request, response);
 		
 	}

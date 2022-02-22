@@ -56,6 +56,7 @@
 						<th>상품ID</th>
 						<th>상품이름</th>
 						<th>상품재고</th>
+						<th>주문수량</th>
 						<th>상품가격</th>
 						<th>총결제금액</th>
 					</tr>
@@ -65,6 +66,7 @@
 						<td><c:out value="${order.prodID}" /></td>
 						<td><c:out value="${order.prodName}" /></td>
 						<td><c:out value="${order.prodQuantity}" /></td>
+						<td><c:out value="${order.orderQuantity}" /></td>						
 						<td><c:out value="${order.prodPrice}" /></td>
 						<td><c:out value="${order.totalPrice}" /></td>
 					</tr>
