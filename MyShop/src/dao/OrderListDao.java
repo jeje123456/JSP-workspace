@@ -11,13 +11,13 @@ import javax.sql.DataSource;
 
 import beans.Order;
 
-public class OrderListDAO {
+public class OrderListDao {
 	private DataSource dataSource; // jdbc/shop 커넥션 풀 연결 객체
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	public OrderListDAO(DataSource dataSource) {
+	public OrderListDao(DataSource dataSource) {
 		this.dataSource = dataSource; // 객체 생성시 커넥션 풀 daraSource를 입력
 	}
 

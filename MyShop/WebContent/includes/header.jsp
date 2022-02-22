@@ -22,8 +22,8 @@
 			<a id="m-home" class="nav-link" href="<%=request.getContextPath()%>/home/managerMain.jsp">🥦못난이 농산품</a>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a id="m-product" class="nav-link" href="<%=request.getContextPath()%>/managerProduct">농산물</a> 
-					<a id="m-review" class="nav-link" href="<%=request.getContextPath()%>/managerReview">리뷰</a> 
+					<a id="m-product" class="nav-link" href="<%=request.getContextPath()%>/managerProduct?cmd=list">농산물</a> 
+					<a id="m-review" class="nav-link" href="<%=request.getContextPath()%>/managerReview?cmd=list">리뷰</a> 
 					<a id="m-member" class="nav-link" href="<%=request.getContextPath()%>/member?cmd=memberList">농민·회원 관리</a>
 					<a id="m-order" class="nav-link" href="<%=request.getContextPath()%>/managerOrderlist?cmd=list">주문 내역 관리</a>
 				</div>

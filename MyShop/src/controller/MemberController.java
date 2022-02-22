@@ -15,23 +15,23 @@ import javax.sql.DataSource;
 
 import beans.Farmer;
 import beans.User;
-import dao.FarmerDAO;
-import dao.UserDAO;
+import dao.FarmerDao;
+import dao.UserDao;
 
 @WebServlet("/member")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private FarmerDAO farmerDao;
-	private UserDAO userDao;
+	private FarmerDao farmerDao;
+	private UserDao userDao;
 	
 	@Resource(name = "jdbc/shop")
 	private DataSource dataSource;
 	
 	@Override
 	public void init() throws ServletException {
-		farmerDao = new FarmerDAO(dataSource);
-		userDao = new UserDAO(dataSource);
+		farmerDao = new FarmerDao(dataSource);
+		userDao = new UserDao(dataSource);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

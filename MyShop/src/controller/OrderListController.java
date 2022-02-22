@@ -13,20 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import beans.Order;
-import dao.OrderListDAO;
+import dao.OrderListDao;
 
 @WebServlet("/managerOrderlist")
 public class OrderListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private OrderListDAO orderListDao;
+	private OrderListDao orderListDao;
 	
 	@Resource(name = "jdbc/shop")
 	private DataSource dataSource;
 	
 	@Override
 	public void init() throws ServletException {
-		orderListDao = new OrderListDAO(dataSource);
+		orderListDao = new OrderListDao(dataSource);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
