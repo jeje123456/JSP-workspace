@@ -9,17 +9,7 @@ public class Review {
 	private String reviewTitle;
 	private String reviewContent;
 	private int prodID;
-	
-	public Review() { }
-	
-	public Review(String userID, LocalDate reviewDate, String reviewTitle, String reviewContent, int prodID) {
-		super();
-		this.userID = userID;
-		this.reviewDate = reviewDate;
-		this.reviewTitle = reviewTitle;
-		this.reviewContent = reviewContent;
-		this.prodID = prodID;
-	}
+	private String farmID;
 	
 	public int getReviewID() {
 		return reviewID;
@@ -57,13 +47,18 @@ public class Review {
 	public void setProdID(int prodID) {
 		this.prodID = prodID;
 	}
-
+	public String getFarmID() {
+		return farmID;
+	}
+	public void setFarmID(String farmID) {
+		this.farmID = farmID;
+	}
 	@Override
 	public String toString() {
-		return "Review [ reviewID=" + reviewID + ", userID=" + userID + ", reviewDate=" + reviewDate + ", reviewTitle="
-				+ reviewTitle + ", reviewContent=" + reviewContent + ", prodID=" + prodID + " ]";
+		return "Review [reviewID=" + reviewID + ", userID=" + userID + ", reviewDate=" + reviewDate + ", reviewTitle="
+				+ reviewTitle + ", reviewContent=" + reviewContent + ", prodID=" + prodID + ", farmID=" + farmID + "]";
 	}
 	
-	
+
 }
 

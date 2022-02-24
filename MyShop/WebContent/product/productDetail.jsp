@@ -34,8 +34,8 @@ h3{
     <p>가격: <c:out value="${product.prodPrice}" />원</p>
     <p>남은수량: <c:out value="${product.prodInven}" />개</p>
     <a class="btn btn-secondary mt-auto" href="<%= request.getContextPath() %>/reviewController?cmd=find&prodID=<c:out value="${product.prodID}" />">리뷰보기</a>
-    <button type="button" class="btn btn-info mt-auto btn-edit" data-id="<c:out value='${product.prodID}' />">수정</button>
-    <button type="button" class="btn btn-danger mt-auto btn-delete" data-id="<c:out value='${product.prodID}' />" data-toggle="modal" data-target="#modal-delete">삭제</button>
+    <button type="button" class="btn btn-primary btn-update" data-id="<c:out value='${product.prodID}' />" data-toggle="modal" data-target="#modal-update">수정</button>
+    <button type="button" class="btn btn-danger btn-delete" data-id="<c:out value='${product.prodID}' />" data-toggle="modal" data-target="#modal-delete">삭제</button>
   </div>
 </div>
 <br>
@@ -52,7 +52,7 @@ h3{
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="title-upd" class="modal-title"></h5>
+        <h5 id="title-upd" class="modal-title">상품 정보 수정</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -75,15 +75,19 @@ h3{
           </div>
           
           <div class="form-group">
-            <label for="prodInfo">상품정보</label>
-            <input type="text" class="form-control" id="prodInfo" name="prodInfo" required maxlength="15" />
+            <label for="prodInfo">상품가격</label>
+            <input type="text" class="form-control" id="prodPrice" name="prodPrice" required />
           </div>
-
+          
           <div class="form-group">
-            <label for="prodInven">남은수량</label>
+            <label for="prodInfo">상품재고</label>
             <input type="text" class="form-control" id="prodInven" name="prodInven" required />
           </div>
           
+          <div class="form-group">
+            <label for="prodInfo">상품정보</label>
+            <input type="text" class="form-control" id="prodInfo" name="prodInfo" required maxlength="15" />
+          </div>
           
         </div>
         <div class="modal-footer">
@@ -100,7 +104,7 @@ h3{
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">delete</h5>
+        <h5 class="modal-title">상품 삭제</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -111,7 +115,7 @@ h3{
       <div class="modal-footer">
         <form id="frm-delete">
           <input type="hidden" name="cmd" value="delete" />
-          <input type="hidden" name="id" value="" />
+          <input type="hidden" name="prodID" value="" />
           <button type="submit" class="btn btn-danger btn-action">삭제</button>
         </form>
         <button type="button" class="btn btn-secondary btn-action" data-dismiss="modal">취소</button>
@@ -125,4 +129,7 @@ h3{
 <script>
 	$('.nav-link').removeClass('active');
 	$('#m-product').addClass('active');
+	var path = '<%=request.getContextPath()%>';
 </script>
+
+<script src="assets/js/modal.js"></script>

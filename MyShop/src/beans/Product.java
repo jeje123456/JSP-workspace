@@ -8,10 +8,6 @@ public class Product {
 	private int prodInven;
 	private String prodImg;
 	private String prodInfo;
-	
-	public Product() {
-	}
-
 
 	public int getProdID() {
 		return prodID;

@@ -81,9 +81,9 @@ public class OrderListController extends HttpServlet {
 	}
 
 	private void ordersList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Order> ordersList = orderListDao.findAll(); // DB의 모든 주문내역 가져오기
+		List<Order> orderList = orderListDao.findAll(); // DB의 모든 주문내역 가져오기
 		
-		request.setAttribute("ordersList", ordersList);
+		request.setAttribute("orderList", orderList);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("orders/ordersList.jsp");
 		rd.forward(request, response); // 리퀘스트를 유지하면서 ordersList.jsp페이지로 이동

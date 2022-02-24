@@ -32,6 +32,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				Product product = new Product();
+				
 				product.setProdID(rs.getInt("prodID"));
 				product.setFarmID(rs.getString("farmID"));
 				product.setProdName(rs.getString("prodName"));
@@ -65,6 +66,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				product = new Product();
+				
 				product.setProdID(rs.getInt("prodID"));
 				product.setFarmID(rs.getString("farmID"));
 				product.setProdName(rs.getString("prodName"));
@@ -130,7 +132,7 @@ public class ProductDao {
 
 		try {
 			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement("update product set farmID = ? prodName = ?, prodPrice = ?, prodInven = ?, prodImg = ?, prodInfo = ? where prodId = ?");
+			pstmt = conn.prepareStatement("update product set farmID = ?, prodName = ?, prodPrice = ?, prodInven = ?, prodImg = ?, prodInfo = ? where prodID = ?");
 			
 			pstmt.setString(1, product.getFarmID());
 			pstmt.setString(2, product.getProdName());
@@ -140,7 +142,6 @@ public class ProductDao {
 			pstmt.setString(6, product.getProdInfo());
 			pstmt.setInt(7, product.getProdID());
 			
-
 			rowAffected = pstmt.executeUpdate() > 0;
 
 		} catch (SQLException e) {
@@ -170,7 +171,7 @@ public class ProductDao {
 			closeAll();
 		}
 
-		System.out.println("주문 내역 삭제 완료");
+		System.out.println("상품 삭제 완료");
 		return rowDeleted;
 	}
 }

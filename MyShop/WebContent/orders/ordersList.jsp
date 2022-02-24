@@ -25,7 +25,7 @@
     </thead>
     <tbody>
       <!-- controller 에서 저장한 ordersList(변수 : List<OrderList> ordersList)가 여기로 넘어옴 -->
-      <c:forEach var="order" items="${ordersList}">
+      <c:forEach var="order" items="${orderList}">
         <tr>
           <td class="th-1"><c:out value="${order.orderID}" /></td>
           <td><c:out value="${order.userID}" /></td>
@@ -57,7 +57,7 @@
 <script>
   $('.nav-link').removeClass('active');
   $('#m-order').addClass('active');
-  var path = '<%= request.getContextPath() %>';
+  var path = '<%= request.getContextPath()%>';
 </script>
 
 <script src="assets/js/list.js"></script>

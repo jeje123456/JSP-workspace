@@ -22,34 +22,6 @@ public class FarmerDao {
 		this.dataSource = dataSource; 
 	}
 	
-	public int login(String farmID, String farmPassword) {
-		try {
-			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement("select farmPassword from farmer where farmID=?");
-			pstmt.setString(1, farmID);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				if(rs.getString(1).equals(farmPassword)) { // 로그인 성공
-					return 1;
-				}
-				else {
-					return 0; // 결과는 나오지만 입력한 비밀번호가 틀린경우
-				}
-			}
-			
-			return -1; // 결과가 없는 경우 = 아이디가 없음
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("SQL 오류");
-		}finally {
-			closeAll();
-		}
-		
-		return -2; // DB오류(DB연결 중에 오류가 생긴 경우)
-	}
-	
 	private void closeAll() {
 		// DB 연결 객체들을 닫는 과정은 필요함(용량문제로 인해) - 모든 메소드에 DB연결할 때마다 닫아줘야함
 		try {

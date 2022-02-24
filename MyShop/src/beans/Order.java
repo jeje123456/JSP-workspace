@@ -18,6 +18,7 @@ public class Order {
 	private boolean farmCheck;
 	private int trackNum;
 	private String is_status;
+	
 	public int getOrderID() {
 		return orderID;
 	}
@@ -102,7 +103,7 @@ public class Order {
 	public void setFarmTel(String farmTel) {
 		this.farmTel = farmTel;
 	}
-	public boolean isFarmCheck() {
+	public boolean getFarmCheck() {
 		return farmCheck;
 	}
 	public void setFarmCheck(boolean farmCheck) {

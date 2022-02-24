@@ -14,11 +14,10 @@ import javax.sql.DataSource;
 
 import beans.Product;
 import dao.ProductDao;
-//import dao.ReplyDao;
-//import dao.ReviewDao;
+import utills.Json;
 
 @WebServlet("/managerProduct")
-public class prodController extends HttpServlet {
+public class ProdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ProductDao productDao;
@@ -31,13 +30,7 @@ public class prodController extends HttpServlet {
 		productDao = new ProductDao(datasource);
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-//		List<Product> prod = prodDao.findAll();
-//		prod.forEach(product -> System.out.println(product.toString()));	// 전체출력 테스트용
-//		System.out.println(prodDao.find(1));
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("cmd");
 
@@ -46,7 +39,7 @@ public class prodController extends HttpServlet {
 			case "find": // 상품 하나의 상세정보 출력
 				find(request, response);
 				break;
-			case "del": // 삭제
+			case "delete": // 삭제
 				delete(request, response);
 				break;
 			case "list": // 전체 상품을 화면에 테이블로 표시
@@ -54,6 +47,9 @@ public class prodController extends HttpServlet {
 				break;
 			case "save": // 상품 저장
 				save(request, response);
+				break;
+			case "edit": // 상품 수정
+				edit(request, response);
 				break;
 			case "update": // 상품 수정
 				update(request, response);
@@ -64,6 +60,17 @@ public class prodController extends HttpServlet {
 			}
 		} finally {
 		}
+	}
+
+	private void edit(HttpServletRequest request, HttpServletResponse response) {
+		int prodID = Integer.parseInt(request.getParameter("prodID")); //문자열 id를 정수 변환
+		
+		Product product = productDao.find(prodID); // id로 연락처 객체 찾기
+		if(product != null) {
+			System.out.println("찾기 완료!");
+			new Json(response).sendContact(product); // 연락처를 상태와 제이슨으로 변환해서 출력
+		}
+		
 	}
 
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,23 +84,24 @@ public class prodController extends HttpServlet {
 		product.setProdImg(request.getParameter("prodImg"));
 		product.setProdInfo(request.getParameter("prodInfo"));
 		
+		System.out.println(product.toString());
+		
 		boolean isUpdated = productDao.update(product);
 		
 		if (isUpdated) {
 			System.out.println("상품 수정 완료!");
-			
-			request.setAttribute("product", product);
-			RequestDispatcher rd = request.getRequestDispatcher("managerProduct?cmd=find");
-			rd.forward(request, response);
+			new Json(response).sendMessage(true, "연락처 수정됨");
 		}
 	}
 	
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int prodID = Integer.parseInt(request.getParameter("prodID"));
-		productDao.delete(prodID);
+		boolean isDeleted = productDao.delete(prodID);
 		
-		response.sendRedirect("managerProduct?cmd=list");
-
+		if(isDeleted) {
+			System.out.println("삭제 완료!");
+			new Json(response).sendMessage(true, "상품 삭제됨");
+		}
 	}
 
 	private void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

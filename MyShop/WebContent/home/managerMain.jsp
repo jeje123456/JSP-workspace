@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%-- <%
+<%
 	String manID =  (String)session.getAttribute("manID");
 	if(manID == null){
 		response.sendRedirect("../login/managerLogin.jsp");
 	}  
-%> --%>
+%>
 
 	
 <jsp:include page="/includes/header.jsp" />

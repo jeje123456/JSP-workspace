@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 import beans.Review;
 
-
 public class ReviewDao {
 	private DataSource datasource;
 	private Connection conn;
@@ -25,7 +24,7 @@ public class ReviewDao {
     
     // 모든 리뷰를 리스트로 리턴
     public List<Review> findAll(){
-    	List<Review> list = new ArrayList<>();
+    	List<Review> reviewList = new ArrayList<>();
     	
     	try {
     		conn = datasource.getConnection();
@@ -40,8 +39,9 @@ public class ReviewDao {
 				review.setReviewDate(rs.getDate("reviewDate").toLocalDate());
 				review.setReviewContent(rs.getString("reviewContent"));
 				review.setProdID(rs.getInt("prodID"));
+				review.setFarmID(rs.getString("farmID"));
 				
-				list.add(review);
+				reviewList.add(review);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL에러 - review findAll");
@@ -50,7 +50,7 @@ public class ReviewDao {
 			closeAll();
 		}
     	
-		return list;
+		return reviewList;
     }
     
     public Review find(int reviewID) {
@@ -65,7 +65,7 @@ public class ReviewDao {
 			
 			while(rs.next()) {
 				// rs에 리턴받은 데이터를 속성별로 review객체에 저장
-				review = new Review();	// 여기서 ""내부는 DB의 속성이름과 같아야함
+				review = new Review();
 				
 				review.setReviewID(rs.getInt("reviewID"));
 				review.setReviewTitle(rs.getString("reviewTitle"));;
@@ -86,11 +86,11 @@ public class ReviewDao {
     
     public List<Review> findProd(int prodID) {
     	// 받아온 prodID로 같은 값을 가진 리뷰들을 모두 출력
-    	List<Review> reviewList = new ArrayList<>();
+    	List<Review> reviews = new ArrayList<>();
     	
     	try {
     		conn = datasource.getConnection();
-			pstmt = conn.prepareStatement("select * from review where prodID=?");
+			pstmt = conn.prepareStatement("select * from review where prodID = ?");
 			pstmt.setInt(1, prodID);
 			rs = pstmt.executeQuery();
 			
@@ -103,8 +103,9 @@ public class ReviewDao {
 				review.setReviewDate(rs.getDate("reviewDate").toLocalDate());
 				review.setReviewContent(rs.getString("reviewContent"));
 				review.setProdID(rs.getInt("prodID"));
+				review.setFarmID(rs.getString("farmID"));
 				
-				reviewList.add(review);
+				reviews.add(review);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL에러 - review findProd");
@@ -113,7 +114,7 @@ public class ReviewDao {
 			closeAll();
 		}
     	
-		return reviewList;
+		return reviews;
     }
     
 	public boolean delete(int reviewID) {
@@ -122,7 +123,7 @@ public class ReviewDao {
 					
 			try {
 				conn = datasource.getConnection();
-				pstmt = conn.prepareStatement("DELETE FROM review WHERE reviewid = ?");
+				pstmt = conn.prepareStatement("DELETE FROM review WHERE reviewID = ?");
 				pstmt.setInt(1, reviewID);
 				rowDeleted = pstmt.executeUpdate() > 0;
 				

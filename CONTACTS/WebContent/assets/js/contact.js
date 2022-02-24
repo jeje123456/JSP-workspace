@@ -93,9 +93,8 @@
 
     $.ajax({
       type: 'POST',
-      url: path + '/contact?cmd=delete', // 수정하기 창
+      url: path + '/contact?cmd=delete', // 삭제하기 창
       data: $('#frm-delete').serialize(), //폼태그 입력 내용을 문자열로 변환
-      dataType: 'json', //받을때 타입
     })
       .done(function (data) {
         if (data.status) {

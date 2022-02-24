@@ -36,6 +36,7 @@ public class OrderListDao {
 				order.setOrderID(rs.getInt("orderID"));
 				order.setCartID(rs.getInt("cartID"));
 				order.setUserID(rs.getString("userID"));
+				order.setUserName(rs.getString("userName"));
 				order.setUserAdd(rs.getString("userAdd"));
 				order.setUserTel(rs.getString("userTel"));
 				order.setProdID(rs.getInt("prodID"));
